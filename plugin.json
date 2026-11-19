@@ -1,0 +1,23 @@
+{
+  "slug": "Morphader",
+  "name": "Morphader",
+  "version": "2.0.0",
+  "license": "GPL-3.0-or-later",
+  "brand": "Haer",
+  "author": "Haer",
+  "authorEmail": "",
+  "authorUrl": "",
+  "pluginUrl": "",
+  "manualUrl": "",
+  "sourceUrl": "https://github.com/hardyfinn/Morphader",
+  "donateUrl": "",
+  "changelogUrl": "",
+  "modules": [
+    {
+      "slug": "Morphader",
+      "name": "Morphader",
+      "description": "Stereo audio crossfader with 14 ways from A to B: filter swap, gate chop, ring, vocoder, spectral handover, tape stop, crush, dub throw, reverb wash, grain shuffle, freeze, envelope swap, fold, equal power. CHARACTER shapes each mode, GLIDE and GO for timed transitions",
+      "tags": ["Mixer", "Effect", "Utility", "Visual"]
+    }
+  ]
+}
