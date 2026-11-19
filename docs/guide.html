@@ -1,0 +1,58 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Morphader guide</title>
+<style>
+@page{size:A4;margin:16mm 16mm 16mm 16mm}
+body{font-family:Inter,system-ui,sans-serif;color:#22201f;font-size:10.5pt;line-height:1.45}
+h1{font-size:26pt;margin:0 0 2mm}h2{font-size:14pt;margin:7mm 0 2mm;border-bottom:2px solid #f2a541;padding-bottom:1mm}
+.sub{color:#666;margin-bottom:5mm}
+.top{display:flex;gap:7mm;align-items:flex-start}.top img{width:72mm;border-radius:2mm}
+table{border-collapse:collapse;width:100%;font-size:9.5pt}td,th{border-bottom:1px solid #ddd;padding:1.6mm 2mm;vertical-align:top;text-align:left}
+th{background:#f4efe6}.n{color:#999;width:6mm}.a{color:#c27d1b;font-weight:700}.b{color:#2a95a5;font-weight:700}
+.box{background:#f7f3ec;border-left:3px solid #5fc9d8;padding:3mm 4mm;margin:3mm 0;break-inside:avoid}
+.box h3{margin:0 0 1.5mm;font-size:11pt}ul{margin:1mm 0 1mm 5mm;padding:0}
+</style></head><body>
+<h1>Morphader</h1>
+<div class="sub">Stereo crossfader for VCV Rack · 14 ways from <span class="a">A</span> to <span class="b">B</span> · version 2.0.0</div>
+<div class="top"><img src="panel-preview.png"><div>
+<h2 style="margin-top:0">The idea</h2>
+<p>An ordinary crossfader only changes the level of the two signals. Morphader changes <i>how</i> A turns into B. Every mode follows the same rule: FADE fully left is exactly A, FADE fully right is exactly B, and the middle is where that mode does its thing.</p>
+<h2>Controls</h2>
+<ul>
+<li><b>FADE</b> (big knob): where you are between A and B. The CV input is 0 to 10 V for the whole way, through the <b>FADE CV</b> trim (which can also invert it).</li>
+<li><b>MODE</b>: picks one of the 14 methods. The MODE CV input steps through all 14 over 0 to 10 V. Changing mode does a tiny 4 ms dip so it never clicks.</li>
+<li><b>CHARACTER</b>: shapes the current mode. The screen tells you what it is doing (rate, resonance, decay and so on). It has its own CV input and trim.</li>
+<li><b>GLIDE</b>: how long a full A-to-B trip takes, from instant to 10 s. FADE moves at a steady speed, so even a sudden CV jump becomes a smooth sweep.</li>
+<li><b>GO</b> (button or trigger): flips to the other side over the glide time. With FADE at A, press GO and it travels to B. Press again and it comes back. The light is on while flipped.</li>
+<li><b>A L / A R, B L / B R</b>: the two stereo sources. The right inputs copy the left ones when unplugged, so mono works. <b>OUT L / OUT R</b>: stereo out (some modes, like dub throw and reverb wash, add stereo width even from mono).</li>
+<li><b>A and B lights</b>: how much of each side you are hearing.</li>
+</ul></div></div>
+
+<h2>The 14 modes</h2>
+<table><tr><th></th><th>Mode</th><th>On the way from A to B</th><th>CHARACTER</th><th>Try it on</th></tr>
+<tr><td class="n">1</td><td><b>Filter swap</b></td><td>A's low-pass closes while B's high-pass opens; they meet around 700 Hz in the middle.</td><td>resonance</td><td>two full loops: the classic DJ "bass swap" feel</td></tr>
+<tr><td class="n">2</td><td><b>Gate chop</b></td><td>Switches rapidly between A and B. In the centre it's 50/50 time; as you move, the time share tilts.</td><td>rate, 0.5 Hz to 2 kHz</td><td>slow: stutter edits. Above ~100 Hz: a new timbre (pulse-width-style mix)</td></tr>
+<tr><td class="n">3</td><td><b>Ring</b></td><td>A × B ring modulation rises to the centre, then gives way to B.</td><td>how wide the ring zone is</td><td>a drone against drums: metallic hits in the middle</td></tr>
+<tr><td class="n">4</td><td><b>Vocoder</b></td><td>A → A speaking with B's spectrum → B speaking with A's → B.</td><td>envelope release, slow to snappy</td><td>pad (A) and drum loop (B): the pad gets the groove</td></tr>
+<tr><td class="n">5</td><td><b>Spectral</b></td><td>Eight bands. B takes them over one at a time from the bass up.</td><td>overlap between bands</td><td>two full mixes: B's kick arrives first, its hats last</td></tr>
+<tr><td class="n">6</td><td><b>Tape stop</b></td><td>A slows down and darkens; B spins up from low.</td><td>how far the pitch drops (1 to 4 octaves)</td><td>GO with a 1 to 2 s glide for a tape-stop drop</td></tr>
+<tr><td class="n">7</td><td><b>Crush</b></td><td>A degrades into grit; B starts gritty and resolves.</td><td>bit depth ↔ sample rate</td><td>breaks and stabs</td></tr>
+<tr><td class="n">8</td><td><b>Dub throw</b></td><td>A is thrown into a feedback delay; its echoes trail off as B arrives.</td><td>echo time, 60 ms to 1 s</td><td>vocal chops or chords; GO for a dub-style exit</td></tr>
+<tr><td class="n">9</td><td><b>Reverb wash</b></td><td>A drowns in reverb; B emerges dry out of the wash.</td><td>decay, 0.6 to 12 s</td><td>breakdowns: wash the beat out, bring the pad up</td></tr>
+<tr><td class="n">10</td><td><b>Grain shuffle</b></td><td>Short grains picked at random, with the odds of B rising with FADE. Near the middle the grains also jump back in time.</td><td>grain length, 5 to 400 ms</td><td>two drum patterns: a glitchy, Autechre-ish handover</td></tr>
+<tr><td class="n">11</td><td><b>Freeze</b></td><td>As soon as FADE leaves A, A freezes into a loop that fades while B comes in live.</td><td>loop length, 30 ms to 1 s (live)</td><td>a held chord fragment under a new section</td></tr>
+<tr><td class="n">12</td><td><b>Env swap</b></td><td>First B's dynamics take over A (A plays B's rhythm), then B's sound takes over.</td><td>envelope release</td><td>pad (A) and hi-hats (B): the rhythm swaps before the sound</td></tr>
+<tr><td class="n">13</td><td><b>Fold</b></td><td>A wavefolds into noisy harmonics; B starts folded and unfolds.</td><td>fold amount</td><td>basslines and simple waves</td></tr>
+<tr><td class="n">14</td><td><b>Equal power</b></td><td>The standard crossfade, for reference.</td><td>linear → equal power → wide → DJ cut</td><td>anything</td></tr>
+</table>
+
+<h2>Patch ideas</h2>
+<div class="box"><h3>1. Planned section changes (beating loop fatigue)</h3>
+Put your current loop in A and the next section in B. Patch a clock divider into <b>GO</b> so it fires every 16 or 32 bars. Set GLIDE to 2 to 8 s and choose a mode per transition: Tape stop for drops, Reverb wash for breakdowns, Spectral for builds.
+<ul><li>Variation: a stepped random CV into MODE so each GO uses a different method.</li><li>Variation: GLIDE CV from a slow LFO, so some transitions are snaps and some are long blends.</li></ul></div>
+<div class="box"><h3>2. Self-mutating texture</h3>
+Two related voices (for example a Marbles-style random melody and a held chord) into A and B. A slow smooth random (VCV Random, about 0.1 Hz) into FADE CV, another into CHARACTER CV. Use Grain shuffle or Vocoder. The patch keeps drifting between states without ever settling.
+<ul><li>Variation: the same random into MODE CV through a slew, so the method itself changes every few bars.</li></ul></div>
+<div class="box"><h3>3. Morphader as a sound source</h3>
+Gate chop with CHARACTER above 100 Hz, and two oscillators a fifth apart in A and B. FADE now sets the pulse-width-like blend, so modulate FADE with an envelope for plucky timbre changes. Ring mode with FADE at the centre turns it into a ring modulator with a dry/wet control.
+</div>
+<p style="color:#888;font-size:9pt;margin-top:6mm">Built for Haer, 2026. Source: github.com/hardyfinn/Morphader. Not yet tested inside Rack: please report anything odd.</p>
+</body></html>
