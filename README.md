@@ -26,3 +26,7 @@ FADE moves from A to B, MODE picks the method, and CHARACTER shapes it. At FADE 
 Right inputs are normalled to the left ones, so mono sources work.
 
 Build: every push builds a Mac (Apple Silicon) `.vcvplugin` with GitHub Actions. `make test` runs offline engine checks and writes a demo WAV. The panel comes from `res/make_panel.py`.
+
+## Licence
+
+MIT (see `LICENSE.txt`): you're free to use, change, port (VST/CLAP, other platforms, hardware) and share this code, as long as the copyright notice and licence text come along. Fonts on the panel (Inter, Climate Crisis) are under the SIL Open Font Licence.
